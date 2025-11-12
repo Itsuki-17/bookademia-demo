@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 Bookademia | 書籍詳細: 確率論入門 (絶版)</title>
+    <style>
+        /* アカデミックデザイン共通スタイル */
+        body { 
+            font-family: 'Times New Roman', '游明朝', serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #000030; /* 濃紺 */
+            color: #F5F5DC; /* クリーム色 */
+        }
+        header { 
+            background-color: #000030; 
+            color: #F5F5DC; 
+            padding: 10px 40px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            border-bottom: 2px solid #FFD700; /* ゴールドの区切り線 */
+        }
+        .logo { font-size: 1.8em; font-weight: bold; color: #FFD700; }
+        nav a { color: #F5F5DC; margin-left: 25px; text-decoration: none; font-size: 1.1em; }
+        nav a:hover { color: #FFD700; }
+
+        /* メインコンテンツ */
+        .detail-container { 
+            max-width: 1200px; 
+            margin: 40px auto; 
+            padding: 0 40px; 
+        }
+        
+        /* 書籍情報と取引情報のレイアウト */
+        .book-details {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .book-image-area {
+            flex-shrink: 0; /* 幅を固定 */
+            width: 300px; 
+            text-align: center;
+        }
+        .book-image {
+            width: 100%;
+            height: auto;
+            border: 3px solid #FFD700; /* ゴールド枠 */
+        }
+
+        /* 詳細テキストエリア */
+        .info-area {
+            flex-grow: 1;
+        }
+        .info-area h1 {
+            color: #F5F5DC;
+            font-size: 2.5em;
+            border-bottom: 1px solid #555;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .info-area h2 {
+            color: #FFD700;
+            font-size: 1.5em;
+            margin-top: 30px;
+        }
+        .info-area p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        /* 取引アクションと出品者情報 */
+        .transaction-box {
+            background-color: #1a1a40; /* 背景より少し明るい濃紺 */
+            padding: 30px;
+            border: 3px solid #FFD700; /* ゴールドの枠線で強調 */
+            text-align: center;
+        }
+        .price {
+            font-size: 3em;
+            color: #FFD700;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .seller-info {
+            border-top: 1px solid #555;
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+        .seller-info strong {
+            color: #FFD700;
+            font-size: 1.2em;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .seller-info span {
+            display: block;
+            font-size: 0.9em;
+        }
+
+        /* チャット開始ボタン */
+        .chat-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #FFD700; 
+            color: #000030; 
+            border: none;
+            cursor: pointer;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .chat-button:hover {
+            background-color: #e6c300;
+        }
+        
+        /* フッター */
+        footer {
+            text-align: center; 
+            padding: 20px; 
+            border-top: 1px solid #FFD700;
+            margin-top: 40px;
+            color: #999;
+        }
+    </style>
+    <script>
+        // デモ用の認証チェック (index.htmlと同じロジック)
+        function checkAuth() {
+            const loggedInUser = localStorage.getItem('bookademia_user');
+            const chatButton = document.getElementById('chat-button');
+            
+            if (loggedInUser) {
+                // 認証済みの場合、ボタンを有効化
+                chatButton.textContent = '購入を申し込む (チャット開始)';
+                chatButton.onclick = function() {
+                    alert('チャット画面（chat.html）に遷移します。\n取引相手に氏名と所属が開示されます。');
+                    window.location.href = 'chat.html'; // 実際のチャット画面へ
+                };
+            } else {
+                // 未認証の場合、ボタンを無効化し登録を促す
+                chatButton.textContent = '取引を行うには専門家登録が必要です';
+                chatButton.disabled = true;
+                chatButton.style.backgroundColor = '#555';
+                chatButton.style.cursor = 'not-allowed';
+                chatButton.onclick = function() {
+                    alert('取引には専門家登録（認証）が必要です。');
+                    window.location.href = 'register.html';
+                };
+            }
+        }
+        window.onload = checkAuth;
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">📚 Bookademia</div>
+        <nav>
+            <a href="index.html">ホーム</a>
+            <a href="list.html">出品一覧</a>
+            <a href="register.html">専門家登録</a>
+            <a href="#">マイページ</a>
+        </nav>
+    </header>
+
+    <div class="detail-container">
+        <div class="book-details">
+            <div class="book-image-area">
+                <img src="old_book_demo.png" alt="確率論入門の表紙" class="book-image">
+
+                <p style="margin-top: 10px;">画像はイメージです</p>
+            </div>
+            
+            <div class="info-area">
+                <h1>確率論入門 (絶版)</h1>
+                <p style="font-size: 1.2em; color: #aaa;">著者: K. N. 氏 / 発行: Springer (1985年)</p>
+                <hr style="border-color: #FFD700; margin: 20px 0;">
+
+                <h2>書籍の専門的価値</h2>
+                <p><strong>ISBN:</strong> 978-4-xxxx-xxxx-x</p>
+                <p><strong>状態:</strong> 書き込みあり</p>
+                <p><strong>対象:</strong> 学部生・院生</p>
+
+                <p><strong>学術的引用数 (デモ):</strong> <span style="color: #FFD700;">約 8,500件</span> (専門データベースによる)</p>
+                <p><strong>書評:</strong>この本で扱われている厳密な枠組みは、後に続く複雑な確率過程を理解するための「鍵」となります。当研究室では、新人には必ず通読させている一冊です。</p>
+
+                <h2>専門分野とタグ</h2>
+                <p>
+                    <span style="background-color: #333; padding: 5px 10px; margin-right: 10px; border: 1px solid #FFD700;">#数学</span>
+                    <span style="background-color: #333; padding: 5px 10px; margin-right: 10px; border: 1px solid #FFD700;">#上級者向け</span>
+                    <span style="background-color: #333; padding: 5px 10px; margin-right: 10px; border: 1px solid #FFD700;">#絶版本</span>
+                </p>
+            </div>
+            
+            <div class="book-image-area">
+                <div class="transaction-box">
+                    <h2>Bookademia価格</h2>
+                    <p class="price">¥9,500</p>
+                    <p style="color: #aaa;">定価: ¥15,000 / 希少性スコア: S</p>
+
+                    <div class="seller-info">
+                        <h3>出品者情報</h3>
+                        <strong style="color: white;">斉藤 健 氏</strong>
+                        <span>東京大学 経済学部 助教</span>
+                        <span style="color: #FFD700;">Bookademia 認証済みユーザー</span>
+                    </div>
+
+                    <button id="chat-button" class="chat-button">
+                        購入を申し込む (チャット開始)
+                    </button>
+                    <p style="font-size: 0.8em; margin-top: 10px; color: #999;">取引相手にあなたの氏名と所属が開示されます。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Bookademia - A Scholarly Mart</p>
+    </footer>
+</body>
+</html>
