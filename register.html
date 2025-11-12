@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 Bookademia | 専門家登録</title>
+    <style>
+        /* 共通アカデミックデザイン */
+        body { 
+            font-family: 'Times New Roman', '游明朝', serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #000030; /* 濃紺 */
+            color: #F5F5DC; /* クリーム色 */
+        }
+        header { 
+            background-color: #000030; 
+            color: white; 
+            padding: 20px; 
+            text-align: center;
+            border-bottom: 2px solid #FFD700; /* ゴールドの区切り線 */
+        }
+        h1 { font-size: 2.5em; color: #FFD700; } /* ゴールドの見出し */
+
+        /* フォームコンテナ */
+        .register-container {
+            max-width: 650px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: #1a1a40; /* 背景より少し明るい濃紺 */
+            border: 3px solid #FFD700; /* ゴールドの枠線 */
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); /* ゴールドの影 */
+        }
+        
+        /* フォームのスタイル */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+            color: #F5F5DC;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #FFD700; /* ゴールドの線 */
+            background-color: #000030; /* 濃紺の入力欄 */
+            color: #F5F5DC;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        
+        /* ステップ表示 */
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            color: #999;
+        }
+        .step-indicator div {
+            flex-grow: 1;
+            text-align: center;
+            padding: 10px;
+            border-bottom: 2px solid #555;
+        }
+        .step-indicator .active {
+            color: #FFD700; /* アクティブなステップはゴールド */
+            border-bottom-color: #FFD700;
+        }
+
+        /* 登録料表示セクション（決済機能なし） */
+        .fee-section {
+            padding: 20px;
+            background-color: #000030;
+            border: 1px solid #FFD700;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .fee-section h2 {
+            color: #FFD700;
+            font-size: 1.8em;
+            margin-top: 0;
+        }
+
+        /* 登録ボタン */
+        .submit-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #FFD700; /* ゴールドの背景 */
+            color: #000030; /* 濃紺の文字 */
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .submit-button:hover {
+            opacity: 0.9;
+        }
+        
+        /* フッター */
+        footer {
+            text-align: center; 
+            padding: 20px; 
+            border-top: 1px solid #FFD700;
+            margin-top: 40px;
+            color: #999;
+        }
+    </style>
+<script>
+    function handleRegistration(event) {
+        event.preventDefault();
+        
+        // 入力値を取得
+        const name = document.getElementById('name').value;
+        const affiliation = document.getElementById('affiliation').value;
+        
+        // 🚨 ここが重要：ユーザーデータをブラウザのローカルストレージに保存
+        const userData = {
+            name: name,
+            affiliation: affiliation
+        };
+        // 'bookademia_user' というキーでユーザー情報（氏名と所属）を保存します
+        localStorage.setItem('bookademia_user', JSON.stringify(userData));
+        
+        alert('登録情報を送信しました！\n（デモ版のため、決済手続きはスキップされました。）\n\nトップページで認証済みとして表示されます。');
+        
+        // 認証情報を保存した後、index.htmlに遷移
+        window.location.href = 'index.html'; 
+    }
+</script>
+</head>
+<body>
+    <header>
+        <h1>📚 Bookademia | 新規登録</h1>
+        <p>新規登録を行い、知の共同体へご招待。</p>
+    </header>
+
+    <div class="register-container">
+        <div class="step-indicator">
+            <div class="active">1. 情報入力</div>
+            <div>2. (デモ)登録料表示</div>
+            <div>3. 認証・完了</div>
+        </div>
+
+        <h2>ユーザー情報入力</h2>
+        
+        <form id="registrationForm" onsubmit="handleRegistration(event)">
+            <div class="form-group">
+                <label for="name">氏名 *</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">メールアドレス *</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">電話番号 *</label>
+                <input type="tel" id="phone" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="affiliation">現在の所属機関・役職 *</label>
+                <input type="text" id="affiliation" placeholder="例: △△大学 経済学部 助教 / 〇〇法律事務所 弁護士 / 学生" required>
+            </div>
+            <div class="form-group">
+                <label for="department">在学及び卒業学部・学科 *</label>
+                <input type="text" id="department" placeholder="例: 京都大学 法学部 / 早稲田大学 先進理工学部 / 東京大学 文学院 " required>
+            </div>
+
+            <div class="fee-section">
+                <h2>年間登録料</h2>
+                <p>本サービスは、コミュニティの信頼性とサービス運営のため、年間登録料 ¥500 を予定しています。</p>
+                <p style="font-size: 2em; color: white; margin: 15px 0;">¥500</p>
+                <p style="color: #FFD700;">(デモ版のため、現在は課金されません)</p>
+            </div>
+            
+            <button type="submit" class="submit-button">
+                登録情報を確認し、コミュニティへ参加する
+            </button>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Bookademia - A Scholarly Mart</p>
+    </footer>
+</body>
+</html>
