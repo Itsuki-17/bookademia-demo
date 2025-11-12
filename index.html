@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 Bookademia | ホーム</title>
+    <style>
+        /* アカデミックデザイン共通スタイル */
+        body { 
+            font-family: 'Times New Roman', '游明朝', serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #000030; /* 濃紺 */
+            color: #F5F5DC; /* クリーム色 */
+        }
+        header { 
+            background-color: #000030; 
+            color: #F5F5DC; 
+            padding: 10px 40px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            border-bottom: 2px solid #FFD700; /* ゴールドの区切り線 */
+        }
+        .logo { 
+            font-size: 0;
+            display: flex; 
+            align-items: center;
+        }
+        #header-logo{
+            height:50px;
+            width: auto;        
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+        nav a { 
+            color: #F5F5DC; 
+            margin-left: 25px; 
+            text-decoration: none; 
+            font-size: 1.1em;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #FFD700;
+        }
+
+        /* 認証済みユーザー表示 */
+        #user-status {
+            color: #FFD700;
+            font-weight: bold;
+            margin-left: 20px;
+        }
+
+        /* 検索セクション */
+        .search-container { 
+            text-align: center; 
+            padding: 60px 0; 
+            background-color: #1a1a40; /* 背景より少し明るい濃紺 */
+            border-bottom: 1px solid #FFD700;
+        }
+        .search-container input[type="text"] { 
+            padding: 12px; 
+            width: 60%; 
+            max-width: 600px; 
+            border: 2px solid #FFD700; /* ゴールドの枠線 */
+            background-color: #000030; 
+            color: #F5F5DC;
+            font-size: 1.1em;
+        }
+        .search-container button {
+            padding: 12px 25px;
+            background-color: #FFD700;
+            color: #000030;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        /* コンテンツセクション */
+        .content-section { 
+            padding: 40px; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+        }
+        h2 { 
+            color: #FFD700; 
+            border-bottom: 1px solid #555; 
+            padding-bottom: 5px; 
+            margin-bottom: 30px;
+        }
+        .category-grid { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 20px; 
+            text-align: center; 
+        }
+        .category-item { 
+            background-color: #1a1a40; /* カード背景 */
+            padding: 25px; 
+            border: 1px solid #FFD700; /* ゴールド枠 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+        .category-item a {
+            color: #F5F5DC;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .item-list { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 30px; 
+        }
+        .book-card { 
+            background-color: #1a1a40; 
+            border: 1px solid #555; 
+            padding: 15px; 
+            width: calc(33.33% - 20px); /* 3列表示 */
+        }
+        .book-card h3 { color: #FFD700; }
+        .book-card p { margin: 5px 0; }
+        .book-card a { color: #FFD700; text-decoration: none; }
+
+        footer {
+            text-align: center; 
+            padding: 20px; 
+            border-top: 1px solid #FFD700;
+            margin-top: 40px;
+            color: #999;
+        }
+    </style>
+    <script>
+        // デモ用の認証チェックと表示の切り替え
+        function checkAuth() {
+            const userStatus = document.getElementById('user-status');
+            const nav = document.getElementById('main-nav');
+            // ローカルストレージに保存されたユーザー情報を取得
+            const loggedInUser = localStorage.getItem('bookademia_user');
+            
+            if (loggedInUser) {
+                // 認証済みの表示
+                const userData = JSON.parse(loggedInUser);
+                userStatus.innerHTML = `<span style="color:#FFF;">${userData.affiliation || '匿名'}</span> <span style="color:#FFD700; font-weight: bold;">[認証済み]</span>`;
+                
+                // ナビゲーションの切り替え
+                const registerLink = nav.querySelector('#register-link');
+                if (registerLink) {
+                    registerLink.textContent = 'ログアウト';
+                    registerLink.href = 'javascript:void(0);';
+                    registerLink.onclick = function() {
+                        localStorage.removeItem('bookademia_user'); // 認証情報を削除
+                        alert('ログアウトしました。');
+                        window.location.reload(); // ページを再読み込みして未認証状態へ
+                    };
+                }
+
+                // 「出品する」を有効化
+                nav.querySelector('#submit-link').style.display = 'inline';
+
+            } else {
+                // 未認証の場合は登録へ誘導
+                userStatus.innerHTML = '<a href="register.html" style="color: #FFD700; text-decoration: none;">専門家登録はこちら</a>';
+                 // 「出品する」を非表示
+                 nav.querySelector('#submit-link').style.display = 'none';
+            }
+        }
+
+        // ページロード時に認証チェックを実行
+        window.onload = checkAuth;
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo"><img src = "Title logo.png" alt = "Bookademia ロゴ" id ="header-logo"></div>
+        <nav id="main-nav">
+            <a href="index.html">ホーム</a>
+            <a href="list.html">出品一覧</a>
+            <a href="submit.html" id="submit-link" style="display:none;">出品する</a> <a href="register.html" id="register-link">専門家登録</a> <a href="#">マイページ</a>
+            <span id="user-status"></span> </nav>
+    </header>
+
+    <div class="search-container">
+        <h1 style="color: #F5F5DC; margin-bottom: 20px;">知のバトンで世界を牽引する未来へ。</h1>
+        <form>
+            <input type="text" placeholder="専門書名、著者、ISBNなどで検索..." name="q">
+            <button type="submit">検索</button>
+        </form>
+    </div>
+
+    <section class="content-section">
+        <h2>主要専門分野から探す</h2>
+        <div class="category-grid">
+            <div class="category-item"><a href="list.html?cat=law"> 法学・政治学</a></div>
+            <div class="category-item"><a href="list.html?cat=economy">経済学・ 経営学</a></div>
+            <div class="category-item"><a href="list.html?cat=science">理学・工学</a></div>
+            <div class="category-item"><a href="list.html?cat=medicine">医学・薬学</a></div>
+            <div class="category-item"><a href="list.html?cat=sosical">文学・歴史学</a></div>
+            <div class="category-item"><a href="list.html?cat=agricalture">農学・獣医学</a></div>
+            <div class="category-item"><a href="list.html?cat=medicine">数学・デザイン</a></div>
+            <div class="category-item"><a href="list.html?cat=mental">心理学・社会学</a></div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>厳選された新着本</h2>
+        <div class="item-list">
+            <div class="book-card">
+                <h3>確率論入門 (絶版)</h3>
+                <p>価格: ¥9,500</p>
+                <p style="color: #FFD700;">認証出品者：Dr. A (物理学)</p>
+                <a href="detail.html?id=001">詳細を見る</a>
+            </div>
+            <div class="book-card">
+                <h3>国際私法（最新判例付き）</h3>
+                <p>価格: ¥4,800</p>
+                <p style="color: #FFD700;">認証出品者：教授 N (法学)</p>
+                <a href="detail.html?id=002">詳細を見る</a>
+            </div>
+            <div class="book-card">
+                <h3>計量経済学I（書き込みなし）</h3>
+                <p>価格: ¥3,500</p>
+                <p style="color: #FFD700;">認証出品者：経済研究所</p>
+                <a href="detail.html?id=003">詳細を見る</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Bookademia - A Scholarly Mart</p>
+    </footer>
+</body>
+</html>
