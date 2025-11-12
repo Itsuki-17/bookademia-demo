@@ -79,6 +79,42 @@
             font-size: 1.1em;
             font-weight: bold;
         }
+/* index.html の <style> タグ内に追加 */
+
+/* アンケートボックスのスタイル */
+.feedback-box {
+    text-align: center;
+    padding: 30px;
+    margin: 40px auto;
+    max-width: 800px;
+    background-color: #1a1a40; /* 背景より少し明るい濃紺 */
+    border: 3px solid #FFD700; /* ゴールドの枠線 */
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.feedback-box h2 {
+    color: #FFD700; /* ゴールド */
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    border-bottom: none; /* メインセクションのh2と区別するため */
+}
+
+.feedback-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #FFD700; /* ゴールドの背景 */
+    color: #000030; /* 濃紺の文字 */
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 3px;
+    transition: opacity 0.3s;
+}
+
+.feedback-button:hover {
+    opacity: 0.9;
+}
 
         /* コンテンツセクション */
         .content-section { 
@@ -164,7 +200,7 @@
 
             } else {
                 // 未認証の場合は登録へ誘導
-                userStatus.innerHTML = '<a href="register.html" style="color: #FFD700; text-decoration: none;">新規登録はこちら</a>';
+                userStatus.innerHTML = '<a href="register.html" style="color: #FFD700; text-decoration: none;">専門家登録はこちら</a>';
                  // 「出品する」を非表示
                  nav.querySelector('#submit-link').style.display = 'none';
             }
@@ -180,7 +216,7 @@
         <nav id="main-nav">
             <a href="index.html">ホーム</a>
             <a href="list.html">出品一覧</a>
-            <a href="submit.html" id="submit-link" style="display:none;">出品する</a> <a href="register.html" id="register-link">新規登録</a> <a href="#">マイページ</a>
+            <a href="submit.html" id="submit-link" style="display:none;">出品する</a> <a href="register.html" id="register-link">専門家登録</a> <a href="#">マイページ</a>
             <span id="user-status"></span> </nav>
     </header>
 
@@ -191,6 +227,19 @@
             <button type="submit">検索</button>
         </form>
     </div>
+    <div class="search-container">
+        </div>
+
+    <section class="content-section">
+        <div class="feedback-box">
+            <h2>Bookademia デモ版をご利用いただき、ありがとうございます</h2>
+            <p style="margin-bottom: 25px;">ぜひ、今後の開発に向けた貴重なご感想をお聞かせください。</p>
+            
+            <a href="https://forms.gle/FP6keLVZMQWjDv388" target="_blank" class="feedback-button">
+                アンケートに回答する (所要時間 約3分)
+            </a>
+        </div>
+    </section>
 
     <section class="content-section">
         <h2>主要専門分野から探す</h2>
