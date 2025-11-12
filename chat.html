@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💬 Bookademia | 取引チャット</title>
+    <style>
+        /* アカデミックデザイン共通スタイル */
+        body { 
+            font-family: 'Times New Roman', '游明朝', serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #000030; /* 濃紺 */
+            color: #F5F5DC; /* クリーム色 */
+        }
+        header { 
+            background-color: #000030; 
+            color: #F5F5DC; 
+            padding: 10px 40px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            border-bottom: 2px solid #FFD700; /* ゴールドの区切り線 */
+        }
+        .logo { font-size: 1.8em; font-weight: bold; color: #FFD700; }
+        nav a { color: #F5F5DC; margin-left: 25px; text-decoration: none; font-size: 1.1em; }
+        
+        /* チャットコンテナ */
+        .chat-container {
+            max-width: 900px;
+            height: calc(100vh - 120px); /* 画面の高さいっぱいまで使う */
+            margin: 20px auto;
+            background-color: #1a1a40; /* 背景より少し明るい濃紺 */
+            border: 3px solid #FFD700;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* 取引情報ヘッダー */
+        .trade-header {
+            padding: 15px;
+            background-color: #000030; /* 最も濃い紺 */
+            border-bottom: 1px solid #FFD700;
+            text-align: center;
+        }
+        .trade-header h2 {
+            margin: 5px 0;
+            color: #FFD700;
+        }
+        .trade-header p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        /* メッセージ表示エリア */
+        .messages {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto; /* スクロール可能 */
+        }
+        .message-box {
+            margin-bottom: 15px;
+            line-height: 1.5;
+            padding: 10px;
+            border-radius: 8px;
+            max-width: 80%;
+        }
+        /* 相手のメッセージ (左寄せ) */
+        .partner-message {
+            background-color: #333366; /* 少し明るい青系 */
+            margin-right: auto;
+        }
+        /* 自分のメッセージ (右寄せ) */
+        .self-message {
+            background-color: #FFD700; /* ゴールドの背景 */
+            color: #000030; /* 濃紺の文字 */
+            margin-left: auto;
+            text-align: right;
+        }
+        .message-sender {
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-bottom: 3px;
+            color: #aaa; /* 相手 */
+        }
+        .self-message .message-sender {
+            color: #000030; /* 自分 */
+        }
+        
+        /* 入力エリア */
+        .input-area {
+            padding: 15px;
+            border-top: 1px solid #FFD700;
+            display: flex;
+            background-color: #000030;
+        }
+        .input-area textarea {
+            flex-grow: 1;
+            padding: 10px;
+            resize: none;
+            border: 1px solid #555;
+            background-color: #1a1a40;
+            color: white;
+            font-family: sans-serif; /* 入力しやすいフォント */
+        }
+        .input-area button {
+            padding: 10px 20px;
+            background-color: #FFD700;
+            color: #000030;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        /* 取引完了ボタン */
+        .complete-trade {
+            padding: 10px;
+            background-color: #006400; /* 深緑 */
+            color: white;
+            text-align: center;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+        }
+        .complete-trade:hover {
+            background-color: #007f00;
+        }
+
+        /* フッター */
+        footer {
+            text-align: center; 
+            padding: 20px; 
+            border-top: 1px solid #FFD700;
+            margin-top: 40px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">📚 Bookademia</div>
+        <nav>
+            <a href="index.html">ホーム</a>
+            <a href="list.html">出品一覧</a>
+            <a href="#">マイページ</a>
+        </nav>
+    </header>
+
+    <div class="chat-container">
+        <div class="trade-header">
+            <h2>取引対象: 確率論入門 (絶版)</h2>
+            <p>相手: **斉藤 健 氏** (東京大学 経済学部 助教) | あなた: **田中 悟 氏** (西村法律事務所 弁護士)</p>
+        </div>
+
+        <div class="messages">
+            <div style="text-align: center; color: #aaa; margin-bottom: 20px;">
+                取引が開始されました。双方が認証済み専門家です。氏名と所属は開示されています。
+            </div>
+            
+            <div class="message-box partner-message">
+                <div class="message-sender">斉藤 健 氏 (出品者)</div>
+                <p>この度はご購入希望ありがとうございます。書籍の状態は記載の通りほぼ新品です。発送方法のご希望はありますでしょうか？</p>
+                <span style="font-size: 0.8em; color: #aaa;">10:05 AM</span>
+            </div>
+
+            <div class="message-box self-message">
+                <div class="message-sender">あなた (田中 悟 氏 / 購入希望者)</div>
+                <p>田中です。迅速なご対応に感謝します。価格9,500円で確定でお願いします。発送は追跡可能なレターパックプラスを希望します。可能でしょうか？</p>
+                <span style="font-size: 0.8em; color: #000030;">10:10 AM</span>
+            </div>
+            
+            </div>
+
+        <div class="input-area">
+            <textarea placeholder="メッセージを入力してください..." rows="2"></textarea>
+            <button>送信</button>
+        </div>
+        
+        <div class="complete-trade">
+            取引条件が合意されましたか？ → **購入を確定する** (このボタンで決済/取引完了フローへ進みます)
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Bookademia - A Scholarly Mart</p>
+    </footer>
+</body>
+</html>
